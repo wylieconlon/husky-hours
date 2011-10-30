@@ -211,7 +211,42 @@ td { vertical-align: top; }
    Author: 
    ========================================================================== */
 
+#container {
+	width: 940px;
+	margin: auto;
+}
 
+table {
+	margin: 20px 0;
+}
+
+#business-name {
+	width: 200px;
+}
+
+thead, thead tr:hover {
+	background: #ddd;
+	font-weight: bold;
+}
+
+tr:hover {
+	background: #f8f8f8;
+}
+tr:nth-child(even) {
+	background: #eee;
+}
+tr:nth-child(even):hover {
+	background: #e5e5e5;
+}
+
+td, th {
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+td.today {
+	background: #ccc;
+}
 
 
 
