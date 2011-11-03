@@ -2,8 +2,20 @@
 
 */
 
+{ locations: { ... },
+  tags: {
+  	0: 'Dining halls',
+	1: 'Residence halls',
+	2: 'Classrooms',
+	...
+  }
+}
+
 var locations = {
-	'Stetson West': {
+	0: {
+		name: 'Stetson West',
+		url: 'http://...',
+		parent: 3,
 		hours: [
 			[ {
 				open: "11:00",
@@ -30,7 +42,8 @@ var locations = {
 				open: "14:00",
 				close: "20:00"
 			} ]
-		]
+		],
+		tags: [0, 10, 15]
 	},
 	'Stetson East': {
 		hours: [
