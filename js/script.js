@@ -2,26 +2,9 @@
 
 */
 
-<<<<<<< HEAD
-{ locations: { ... },
-  tags: {
-  	0: 'Dining halls',
-	1: 'Residence halls',
-	2: 'Classrooms',
-	...
-  }
-}
-
-var locations = {
-	0: {
-		name: 'Stetson West',
-		url: 'http://...',
-		parent: 3,
-=======
 // sample locations
 /*var locations = {
 	'Stetson West': {
->>>>>>> 15ae2a460ce5fa1d110b3b360b236b8ef3f5c557
 		hours: [
 			[ {
 				open: "11:00",
