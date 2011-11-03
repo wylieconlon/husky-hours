@@ -221,7 +221,6 @@ table {
 }
 
 #business-name {
-	width: 200px;
 }
 
 thead, thead tr:hover {
@@ -241,14 +240,24 @@ tr:nth-child(even):hover {
 
 td, th {
 	padding: 10px;
-	border: 1px solid #ccc;
 }
-
+td {
+	border: 1px solid #ccc;
+	border-color: #333;
+}
 td.today {
 	background: #ccc;
+	border-color: #333;
+}
+th {
+	border: 1px solid #333;
 }
 
 
+thead tr {
+	color: #fff;
+	background: #999;
+}
 
 
 

@@ -2,7 +2,8 @@
 
 */
 
-var locations = {
+// sample locations
+/*var locations = {
 	'Stetson West': {
 		hours: [
 			[ {
@@ -132,58 +133,109 @@ var locations = {
 			} ]
 		]
 	}
-}
+};*/
+var locations,
+ 	tags;
 
 // jQuery's onload handler
 $(function() {
 	
-	var date = new Date();
+	$.getJSON("http://crew-hours.ccs.neu.edu/gethours.php", renderData);
 	
-	var dayOfWeek = date.getDay() - 1 % 7;
+	function dayOfWeek() {
+		var date = new Date();
+		var day = date.getDay();
+		return (day == 0) ? 6 : (day-1) % 7;
+	}
 	
-	for(var name in locations) {
-		/*
-		// Skips hidden properties of objects added by some libraries
-		if(! locations.hasOwnProperty(loc)) {
-			continue;
+	function hourToString(input) {
+		var emptyTimes = /:00/g;
+		var hour, minute = "", ampm;
+		
+		// HH:00:00 -> HH
+		input = input.replace(emptyTimes, "");
+		
+		hour = parseInt(input.substr(0, 2));
+		
+		if(input.length > 2) {
+			minute = input.substr(2);
 		}
-		*/
 		
-		var loc = locations[name];
-
-		var today = loc.hours[dayOfWeek];
-		console.log(today, today.open, today.close);
+		ampm = (hour<12) ? "am" : "pm";
 		
-		var row = $("<tr>");
-		row.append("<td>"+name+"</td>");
+		if(hour == 0) {
+			hour = 12;
+		} else if(hour > 12) {
+			hour -= 12;
+		}
 		
-		// loops over all days
-		for(var j=0; j<loc.hours.length; j++) {
-			var hours = loc.hours[j];
+		return hour + minute + ampm;
+	}
+	
+	function hoursToString(open, close) {
+		// takes two pairs of HH:MM:SS formatted times
+		// 
+		// returns a human-readable time, like "7am-11pm"
+		//
+		// close may be null, which represents a 24/7 location
+		
+		if(close) {
+			return hourToString(open) + "&#8211;" + hourToString(close);
+		} else {
+			return "All day";
+		}
+	}
+		
+	function renderData(data) {
+		locations = data.locations;
+		tags = data.tags;
+		
+		for(var i in locations) {
+			/*
+			// Skips hidden properties of objects added by some libraries
 			
-			var el = $("<td>");
-			if(j == dayOfWeek) {
-				el.addClass('today');
+			if(! locations.hasOwnProperty(loc)) {
+				continue;
 			}
+			*/
 			
-			// loops over all open/close pairs in a day
-			if(hours.length > 0) {
-				var times = "";
-				for(var k=0; k<hours.length; k++) {
-					times += hours[k].open+"-"+hours[k].close
-					if(k<hours.length-1) {
-						times += ", "
-					}
+			var loc = locations[i],
+				today = loc.hours[dayOfWeek()],
+				row = $("<tr>");
+			
+			row.append("<td>"+loc.name+"</td>");
+			
+			// loops over all days
+			for(var j=0; j<loc.hours.length; j++) {
+				var hours = loc.hours[j];
+				
+				var el = $("<td>");
+				
+				if(j == dayOfWeek()) {
+					el.addClass('today');
 				}
 				
-				el.text(times);
-			} else {
-				el.text("Closed");
+				// loops over all open/close pairs in a day
+				if(hours.length > 0) {
+					var times = "";
+
+					for(var k=0; k<hours.length; k++) {
+						times += hoursToString(hours[k].open, hours[k].close);
+						
+						if(k < hours.length-1) {
+							times += ", ";
+						}
+					}
+	
+					el.html(times);
+				} else {
+					el.text("Closed");
+				}
+				
+				row.append(el);
 			}
 			
-			row.append(el);
+			$("#locations tbody").append(row);
 		}
-		
-		$("#locations tbody").append(row);
-	}	
+	}
 });
