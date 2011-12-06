@@ -42,9 +42,10 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
  * Also: hot pink! (or customize the background color to match your design)
  */
 
+/*
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
-
+*/
 
 /* =============================================================================
    Links
@@ -211,6 +212,12 @@ td { vertical-align: top; }
    Author: 
    ========================================================================== */
 
+body {
+	background: #eee;
+	font-size: 12px;
+	line-height: 1.5em;
+}
+
 #container {
 	width: 940px;
 	margin: auto;
@@ -220,46 +227,51 @@ table {
 	margin: 20px 0;
 }
 
-#business-name {
-}
 
 thead, thead tr:hover {
-	background: #ddd;
+	/*background: #ddd;*/
 	font-weight: bold;
 }
 
-tr:hover {
-	background: #f8f8f8;
-}
-tr:nth-child(even) {
-	background: #eee;
-}
-tr:nth-child(even):hover {
-	background: #e5e5e5;
+tr {
+	border-bottom: 1px solid #ddd;
 }
 
 td, th {
 	padding: 10px;
 }
 td {
-	border: 1px solid #ccc;
-	border-color: #333;
+	background: #fff;
+	border: 1px solid #ddd;
+	vertical-align: middle;
+}
+
+th.today {
+	background: #fff;
 }
 td.today {
-	background: #ccc;
-	border-color: #333;
-}
-th {
-	border: 1px solid #333;
+	background: #eee;
 }
 
 
-thead tr {
-	color: #fff;
-	background: #999;
+.business-name {
+	max-width: 160px;
 }
-
-
+.business-name a {
+	display: block;
+	font-weight: bold;
+	color: #000;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.business-name .description {
+	display: block;
+	color: #666;
+	max-width: 160px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 
 
 
