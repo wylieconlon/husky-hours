@@ -228,11 +228,6 @@ table {
 }
 
 
-thead, thead tr:hover {
-	/*background: #ddd;*/
-	font-weight: bold;
-}
-
 tr {
 	border-bottom: 1px solid #ddd;
 }
@@ -245,9 +240,13 @@ td {
 	border: 1px solid #ddd;
 	vertical-align: middle;
 }
+th {
+	font-weight: normal;
+}
 
 th.today {
 	background: #fff;
+	font-weight: bold;
 }
 td.today {
 	background: #eee;

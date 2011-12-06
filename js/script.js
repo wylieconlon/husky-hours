@@ -94,6 +94,17 @@ $(function() {
 		}
 	}
 	
+	var routes = {
+		"/^$/": "list",
+		"/^map/(:)$/": "map"
+	};
+	
+	function route() {
+		
+	}
+	$(window).bind("hashchange", route);
+	
+	
 	function swapToLocation(e) {
 		console.log(e, e.data.id);
 		
@@ -154,6 +165,10 @@ $(function() {
 	function renderData(data) {
 		locations = data.locations;
 		tags = data.tags;
+
+		for(var i in tags) {
+			$("#category").append("<option>" + tags[i] + "</option>");
+		}
 		
 		for(var i in locations) {
 			/*
@@ -207,7 +222,6 @@ $(function() {
 		
 		$("#locations tbody").append(row);
 		
-		console.log($("th"), $("th").eq(dayOfWeek-1));
 		$("th").eq(dayOfWeek()+1).addClass('today');
-	}	
+	}
 });
